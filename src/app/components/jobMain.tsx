@@ -16,7 +16,6 @@ import {
   MoreVertical,
 } from "lucide-react";
 import Loader from "@/app/components/loader";
-import { getOrganizationJobs } from "@/app/api/job/publishJob";
 import { Job } from "@/types/job";
 
 const JobManagementMain = () => {
@@ -28,7 +27,7 @@ const JobManagementMain = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       setLoading(true);
-      const data = await getOrganizationJobs();
+      const data = []; // Replace with actual API call when available
       setJobs(data);
       setLoading(false);
     };

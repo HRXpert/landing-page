@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Menu, X, Home, Briefcase, Eye, BarChart3, Settings, LogOut, UserCircle, User } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useUser } from '../context/UserContext';
-import { logoutUser } from '../api/auth/auth';
 
 interface RecruiterHeaderProps {
   onToggleSidebar?: () => void;
@@ -25,7 +24,7 @@ const RecruiterHeader = ({ onToggleSidebar, sidebarOpen }: RecruiterHeaderProps 
 
   const handleLogout = async () => {
     try {
-      await logoutUser();
+      // await logoutUser();
       // Clear user context
       setUser(null);
       // Clear local storage
