@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
-import { signInUser } from '../api/auth/auth';
-import { signInWithGoogle } from '../api/auth/OAuth';
+// import { signInUser } from '../api/auth/auth';
+// import { signInWithGoogle } from '../api/auth/OAuth';
 import { useUser } from '../context/UserContext';
 
 const SignIn: React.FC = () => {
@@ -20,51 +20,6 @@ const SignIn: React.FC = () => {
     e.preventDefault();
     setError('');
 
-    try {
-      const result = await signInUser(email, password);
-      // console.log(result);
-
-      if (result.success) {
-        console.log('Login successful');
-        if (result.data?.isVerified) {
-          setUser(result.data);
-          console.log('User is verified');
-          // Redirect to the dashboard or home page
-          switch (result.data.user.role){
-            case 'admin-recruiter':
-              router.push('/admin-recruiter');
-              // router.push('/job-applications?jobid=689b13ef5f0eecc9914cde37');
-              break;
-            case 'recruiter':
-              router.push('/recruiter-dashboard');
-              break;
-            case 'interviewer':
-              router.push('/interviewer');
-              break;
-            case 'candidate': 
-              router.push('/candidate/dashboard');
-              break;  
-              default:
-              router.push('/'); // Fallback to home if role is unknown
-          }
-          // router.push('/oauth-success');
-        } else if (!result.data?.isVerified) {
-          console.log('User is not verified');
-          router.push('/signin/verification-failed');
-          
-          // await resendVerificationEmail();
-        } else {
-          console.log('User verification status is unknown');
-          setError('Unknown Verification Status. Please try again later.');
-        }
-
-
-      } else {
-        setError(result.message || 'Login failed');
-      }
-    } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred');
-    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -168,7 +123,7 @@ const SignIn: React.FC = () => {
           type="button"
           className="w-full flex items-center justify-center gap-2 bg-white text-gray-900 font-semibold py-3 rounded-lg shadow hover:bg-gray-100 transition-all duration-200 border border-gray-300 mb-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           aria-label="Sign in with Google"
-          onClick={() => { signInWithGoogle("signin"); }}
+          onClick={() => { }}
         >
           <svg className="w-5 h-5" viewBox="0 0 48 48" aria-hidden="true"><g><path fill="#4285F4" d="M24 9.5c3.54 0 6.7 1.22 9.19 3.22l6.86-6.86C36.68 2.7 30.77 0 24 0 14.82 0 6.73 5.82 2.69 14.09l7.99 6.21C12.13 13.13 17.56 9.5 24 9.5z" /><path fill="#34A853" d="M46.1 24.55c0-1.64-.15-3.22-.42-4.74H24v9.01h12.42c-.54 2.9-2.18 5.36-4.65 7.03l7.18 5.59C43.98 37.13 46.1 31.36 46.1 24.55z" /><path fill="#FBBC05" d="M10.68 28.3c-1.01-2.99-1.01-6.21 0-9.2l-7.99-6.21C.64 17.18 0 20.5 0 24s.64 6.82 2.69 11.11l7.99-6.21z" /><path fill="#EA4335" d="M24 48c6.77 0 12.48-2.24 16.64-6.09l-7.18-5.59c-2.01 1.35-4.59 2.16-7.46 2.16-6.44 0-11.87-3.63-14.32-8.81l-7.99 6.21C6.73 42.18 14.82 48 24 48z" /></g></svg>
           Continue with Google

@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ArrowLeft, CheckCircle } from 'lucide-react';
-import { respondToInvitation } from '../api/recruiterInvitation/invitations';
 
 const RecruiterSignUp: React.FC = () => {
     const [fullName, setFullName] = useState('');
@@ -50,41 +49,6 @@ const RecruiterSignUp: React.FC = () => {
 
         setLoading(true);
 
-        try {
-            // Call the recruiter signup API
-            const result = await respondToInvitation({
-                token: invitationToken ?? '',
-                response: "accepted",
-                password: password,
-                username: username,
-                fullname: fullName
-            });
-
-            if (result.success) {
-                setSuccess(true);
-                setLoading(false);
-                
-                // Check if Google Calendar connection is required (for interviewers)
-                if (result.data?.requiresGoogleCalendar && result.data?.googleCalendarAuthUrl) {
-                    // Redirect to Google Calendar OAuth
-                    setTimeout(() => {
-                        window.location.href = result.data.googleCalendarAuthUrl;
-                    }, 2000);
-                } else {
-                    // Regular recruiter - redirect to signin
-                    setTimeout(() => {
-                        router.push('/signin');
-                    }, 3000);
-                }
-            } else {
-                setError(result.message || 'Registration failed. Please try again.');
-                setLoading(false);
-            }
-        } catch (err: any) {
-            setError('An unexpected error occurred. Please try again.');
-            console.error('Registration error:', err);
-            setLoading(false);
-        }
     };
 
     // If no invitation token, show error

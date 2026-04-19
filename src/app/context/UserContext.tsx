@@ -1,6 +1,6 @@
 'use client';
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { fetchMe } from '../api/auth/auth';
+// import { fetchMe } from '../api/auth/auth';
 
 type User = {
   id: string;
@@ -26,16 +26,16 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     // Restore user session from cookies on mount
     const restoreSession = async () => {
-      try {
-        const result = await fetchMe();
-        if (result.success && result.data) {
-          setUser(result.data);
-        }
-      } catch (error) {
-        console.error('Failed to restore session:', error);
-      } finally {
-        setLoading(false);
-      }
+      // try {
+      //   // const result = await fetchMe();
+      //   // if (result.success && result.data) {
+      //     // setUser(result.data);
+      //   }
+      // } catch (error) {
+      //   console.error('Failed to restore session:', error);
+      // } finally {
+      //   setLoading(false);
+      // }
     };
 
     restoreSession();
