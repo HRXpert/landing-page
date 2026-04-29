@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { ArrowRight, Sparkles, Linkedin, Mail, ExternalLink, Heart, Lightbulb, Shield, Users, Zap, Globe } from 'lucide-react';
+import { ArrowRight, Sparkles, Linkedin, Mail, Heart, Lightbulb, Shield, Users, Zap, Globe } from 'lucide-react';
 
 const BG = '#080c1a';
 const KF = `
@@ -35,28 +35,32 @@ function useReveal() {
 
 const TEAM = [
   {
-    name: 'Shehryar Ehsan', role: 'Product Owner', initials: 'SE',
+    name: 'Shaheryar Ehsan', role: 'Chief Executive Officer', abbr: 'CEO',
     color: '#818cf8', accent: '#6366f1',
     bio: 'Shapes the product vision and translates business goals into a roadmap that ships. Obsessed with building software people actually want to use.',
-    linkedin: '#', mail: 'shehryar@hrxpert.io', github: '#', portfolio: '#',
+    image: '/team/shaheryar.jpeg',
+    linkedin: '#', mail: 'shaheryar@hrxpert.io',
   },
   {
-    name: 'Umar Farooq', role: 'Product Manager', initials: 'UF',
+    name: 'Umar Farooq', role: 'Chief Technology Officer', abbr: 'CTO',
     color: '#c084fc', accent: '#a855f7',
-    bio: 'Bridges between users and engineers. Defines requirements, leads sprint planning, and makes sure every feature ships on time and on spec.',
-    linkedin: '#', mail: 'umar@hrxpert.io', github: '#', portfolio: '#',
+    bio: 'Architects the platform from the ground up. Drives engineering culture, system design, and makes sure every feature is fast, secure, and scalable.',
+    image: '/team/umar.jpeg',
+    linkedin: '#', mail: 'umar@hrxpert.io',
   },
   {
-    name: 'Sara Adnan', role: 'AI Engineer', initials: 'SA',
+    name: 'Sara Adnan', role: 'Chief Operating Officer', abbr: 'COO',
     color: '#67e8f9', accent: '#06b6d4',
-    bio: 'Designs and trains the AI models powering resume scoring and structured interviews. Turns raw NLP research into production-ready hiring intelligence.',
-    linkedin: '#', mail: 'sara@hrxpert.io', github: '#', portfolio: '#',
+    bio: 'Keeps every part of the business running smoothly. Owns the hiring pipeline, vendor relationships, and turns ambitious strategy into day-to-day execution.',
+    image: '/team/sara.jpeg',
+    linkedin: '#', mail: 'sara@hrxpert.io',
   },
   {
-    name: 'Jaweria Manahil', role: 'DevOps Engineer', initials: 'JM',
+    name: 'Jaweria Manahil', role: 'Chief Growth Officer', abbr: 'CGO',
     color: '#34d399', accent: '#10b981',
-    bio: 'Keeps the platform fast, secure, and always on. Manages CI/CD pipelines, Kubernetes infra, and everything that lets the team ship with confidence.',
-    linkedin: '#', mail: 'jaweria@hrxpert.io', github: '#', portfolio: '#',
+    bio: 'Drives acquisition, retention, and market expansion. Combines data-driven growth loops with authentic storytelling to build a brand customers love.',
+    image: '/team/jaweria.jpeg',
+    linkedin: '#', mail: 'jaweria@hrxpert.io',
   },
 ];
 
@@ -83,64 +87,69 @@ function TeamCard({ member, delay }: { member: typeof TEAM[0]; delay: number }) 
   return (
     <div ref={ref} className="ab-reveal" style={{ animationDelay: `${delay}ms` }}>
       <div
-        className="relative rounded-2xl pb-6 flex flex-col items-center text-center transition-all duration-300"
+        className="relative rounded-2xl overflow-hidden flex flex-col transition-all duration-300"
         style={{
-          background: 'linear-gradient(145deg,#111228,#0d0f1e)',
+          background: 'linear-gradient(160deg,#111228,#0d0f1e)',
           border: `1px solid ${hovered ? member.color + '55' : member.color + '22'}`,
-          transform: hovered ? 'translateY(-7px)' : 'translateY(0)',
-          boxShadow: hovered ? `0 24px 48px ${member.color}16` : 'none',
-          transition: 'all 0.3s ease',
+          transform: hovered ? 'translateY(-8px)' : 'translateY(0)',
+          boxShadow: hovered ? `0 28px 56px ${member.color}20` : `0 4px 20px rgba(0,0,0,0.4)`,
+          transition: 'all 0.35s ease',
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {/* glow overlay */}
-        <div className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-300"
-          style={{ opacity: hovered ? 1 : 0, background: `radial-gradient(ellipse 80% 50% at 50% 0%,${member.color}10,transparent 70%)` }} />
+        {/* Top color bar */}
+        <div className="h-1 w-full" style={{ background: `linear-gradient(90deg,${member.color},${member.accent})` }} />
 
-        {/* Avatar band at top */}
-        <div className="w-full flex flex-col items-center pt-8 pb-5 px-6" style={{ borderBottom: `1px solid ${member.color}18` }}>
-          {/* Avatar circle with spinning gradient ring */}
-          <div className="relative w-28 h-28 mb-4">
-            {/* spinning ring */}
-            <div className="absolute inset-0 rounded-full"
-              style={{
-                background: `conic-gradient(${member.color},${member.accent},${member.color}44,${member.accent},${member.color})`,
-                animation: hovered ? 'ab-spin 2.5s linear infinite' : undefined,
-                opacity: hovered ? 1 : 0.35,
-                transition: 'opacity 0.4s',
-                padding: '3px',
-              }} />
-            {/* inner circle */}
-            <div className="absolute inset-[3px] rounded-full flex items-center justify-center"
-              style={{ background: `linear-gradient(135deg,#1a1a3e,#0d0f1e)`, border: `1px solid ${member.color}30` }}>
-              {/* placeholder image area — swap src later */}
-              <span className="font-black text-[1.6rem] select-none" style={{ color: member.color }}>
-                {member.initials}
-              </span>
-            </div>
+        {/* Photo area — square, cropped from center */}
+        <div className="relative overflow-hidden" style={{ paddingBottom: '100%' }}>
+          {/* Subtle glow behind photo */}
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: `radial-gradient(ellipse 80% 60% at 50% 100%,${member.color}22,transparent 70%)`,
+          }} />
+          <img
+            src={member.image}
+            alt={member.name}
+            className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500"
+            style={{ transform: hovered ? 'scale(1.06)' : 'scale(1)' }}
+            onError={(e) => { (e.target as HTMLImageElement).src = '/team/default.jpeg'; }}
+          />
+          {/* Abbr badge */}
+          <div className="absolute top-3 right-3 w-10 h-10 rounded-xl flex items-center justify-center text-[11px] font-extrabold"
+            style={{ background: `${member.color}22`, border: `1px solid ${member.color}55`, color: member.color, backdropFilter: 'blur(8px)' }}>
+            {member.abbr}
           </div>
-          <div className="text-white font-bold text-[16px] leading-tight">{member.name}</div>
-          <div className="text-[12px] font-semibold mt-1" style={{ color: member.color }}>{member.role}</div>
         </div>
 
-        {/* Body */}
-        <div className="px-6 pt-4 flex flex-col gap-4 w-full">
+        {/* Info area */}
+        <div className="px-5 py-5 flex flex-col gap-3">
+          <div>
+            <div className="text-white font-bold text-[16px] leading-tight">{member.name}</div>
+            <div className="text-[11.5px] font-semibold mt-0.5" style={{ color: member.color }}>{member.role}</div>
+          </div>
+
           <p className="text-slate-400 text-[12.5px] leading-relaxed">{member.bio}</p>
 
-          {/* Social + Portfolio links */}
-          <div className="flex justify-center gap-2.5">
+          {/* Social links */}
+          <div className="flex items-center gap-2 pt-1" style={{ borderTop: `1px solid ${member.color}18` }}>
             {[
-              { icon: Linkedin,     href: member.linkedin, label: 'LinkedIn' },
-              { icon: Mail,         href: `mailto:${member.mail}`, label: 'Email' },
-              { icon: ExternalLink, href: member.portfolio ?? '#', label: 'Portfolio' },
+              { icon: Linkedin, href: member.linkedin, label: 'LinkedIn' },
+              { icon: Mail,     href: `mailto:${member.mail}`, label: 'Email' },
             ].map(({ icon: Icon, href, label }) => (
               <a key={label} href={href} title={label}
-                className="w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
-                style={{ border: `1px solid ${hovered ? member.color + '40' : 'rgba(255,255,255,0.09)'}`, background: hovered ? `${member.color}10` : 'rgba(255,255,255,0.03)' }}>
+                className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+                style={{
+                  border: `1px solid ${hovered ? member.color + '45' : 'rgba(255,255,255,0.09)'}`,
+                  background: hovered ? `${member.color}12` : 'rgba(255,255,255,0.03)',
+                }}>
                 <Icon size={13} style={{ color: hovered ? member.color : '#64748b' }} />
               </a>
             ))}
+            <a href={`mailto:${member.mail}`}
+              className="ml-auto text-[11px] font-semibold transition-colors duration-200"
+              style={{ color: hovered ? member.color : '#475569' }}>
+              {member.mail}
+            </a>
           </div>
         </div>
       </div>
@@ -248,8 +257,9 @@ export default function AboutUsPage() {
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-[1.8rem] font-extrabold text-white mb-2">The team behind HRXpert</h2>
-            <p className="text-slate-500 text-[13px]">Small team. Big ideas. Hover to learn more.</p>
+            <span className="inline-block text-[10px] font-extrabold tracking-[0.25em] uppercase mb-3" style={{ color: '#818cf8' }}>THE TEAM</span>
+            <h2 className="text-[1.9rem] font-extrabold text-white mb-2">Built by people who&apos;ve lived the problem.</h2>
+            <p className="text-slate-500 text-[13px]">Hover over a card to learn more.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {TEAM.map((member, i) => <TeamCard key={member.name} member={member} delay={i * 100} />)}

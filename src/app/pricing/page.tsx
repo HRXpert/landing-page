@@ -46,53 +46,41 @@ interface Plan {
 
 const PLANS: Plan[] = [
   {
-    name: 'Hero', icon: Zap, color: '#818cf8', monthly: 75, annual: 63,
-    subtitle: 'Hiring essentials for small teams',
+    name: 'Basic', icon: Zap, color: '#818cf8', monthly: 100, annual: 84,
+    subtitle: 'For small teams',
     features: [
-      { t: '3 active jobs (+$9/job/mo)', inc: true },
-      { t: 'AI job description writer', inc: true },
-      { t: 'Multi-channel job posting', inc: true },
-      { t: 'Basic candidate pipeline', inc: true },
-      { t: 'Resume parsing (50/mo)', inc: true },
-      { t: 'AI resume scoring', inc: false },
-      { t: 'AI-powered interviews', inc: false },
+      { t: '1,000 resumes / month', inc: true },
+      { t: '50 AI voice interviews', inc: true },
+      { t: 'AI scoring & ranking', inc: true },
+      { t: 'Calendar scheduling', inc: true },
       { t: 'Analytics dashboard', inc: false },
-      { t: 'Approval workflows', inc: false },
-      { t: 'Dedicated account manager', inc: false },
+      { t: 'API access', inc: false },
     ],
-    cta: 'Start free trial', popular: false,
+    cta: 'Get Started', popular: false,
   },
   {
-    name: 'Plus', icon: Star, color: '#c084fc', monthly: 269, annual: 227,
-    subtitle: 'Scale your hiring smarter and faster',
+    name: 'Growth', icon: Star, color: '#c084fc', monthly: 350, annual: 294,
+    subtitle: 'For scaling teams',
     features: [
-      { t: '200 active jobs included', inc: true },
-      { t: 'AI job description writer', inc: true },
-      { t: 'Multi-channel job posting', inc: true },
-      { t: 'Advanced pipeline & CRM', inc: true },
-      { t: 'Unlimited resume parsing & scoring', inc: true },
-      { t: 'AI-powered interviews', inc: true },
-      { t: 'Analytics dashboard', inc: true },
-      { t: 'Approval workflows', inc: true },
-      { t: 'Team collaboration tools', inc: true },
-      { t: 'Dedicated account manager', inc: false },
+      { t: '5,000 resumes / month', inc: true },
+      { t: '200 AI voice interviews', inc: true },
+      { t: 'Full analytics dashboard', inc: true },
+      { t: 'AI JD generator', inc: true },
+      { t: 'Priority email support', inc: true },
+      { t: 'API access', inc: false },
     ],
-    cta: 'Start free trial', popular: true,
+    cta: 'Start Growth Plan', popular: true,
   },
   {
-    name: 'Pro', icon: Crown, color: '#67e8f9', monthly: null, annual: null,
-    subtitle: 'Enterprise-grade, custom-priced',
+    name: 'Enterprise', icon: Crown, color: '#67e8f9', monthly: null, annual: null,
+    subtitle: 'For large organizations',
     features: [
-      { t: 'Unlimited active jobs', inc: true },
-      { t: 'AI job description writer', inc: true },
-      { t: 'Multi-channel job posting', inc: true },
-      { t: 'Advanced pipeline & CRM', inc: true },
-      { t: 'Unlimited resume parsing & scoring', inc: true },
-      { t: 'AI-powered interviews (unlimited)', inc: true },
-      { t: 'Custom analytics & reports', inc: true },
-      { t: 'Custom approval workflows', inc: true },
-      { t: 'eSignature & offer letters', inc: true },
+      { t: 'Unlimited resumes', inc: true },
+      { t: 'Unlimited AI interviews', inc: true },
+      { t: 'Full API + integrations', inc: true },
       { t: 'Dedicated account manager', inc: true },
+      { t: 'SLA + custom onboarding', inc: true },
+      { t: 'White-label option', inc: true },
     ],
     cta: 'Contact Sales', popular: false,
   },
@@ -100,37 +88,37 @@ const PLANS: Plan[] = [
 
 const FEATURES_TABLE = [
   { category: 'Core', items: [
-    { name: 'Active job postings', hero: '3', plus: '200', pro: 'Unlimited' },
-    { name: 'Team members', hero: '3', plus: '15', pro: 'Unlimited' },
-    { name: 'Multi-channel posting', hero: true, plus: true, pro: true },
+    { name: 'Resume processing', basic: '1,000/mo', growth: '5,000/mo', enterprise: 'Unlimited' },
+    { name: 'AI voice interviews', basic: '50/mo', growth: '200/mo', enterprise: 'Unlimited' },
+    { name: 'Calendar scheduling', basic: true, growth: true, enterprise: true },
+    { name: 'AI JD generator', basic: false, growth: true, enterprise: true },
   ]},
   { category: 'AI', items: [
-    { name: 'Resume parsing', hero: '50/mo', plus: 'Unlimited', pro: 'Unlimited' },
-    { name: 'AI scoring & ranking', hero: false, plus: true, pro: true },
-    { name: 'AI-powered interviews', hero: false, plus: true, pro: true },
-    { name: 'Sentiment analysis', hero: false, plus: true, pro: true },
+    { name: 'AI scoring & ranking', basic: true, growth: true, enterprise: true },
+    { name: 'Full analytics dashboard', basic: false, growth: true, enterprise: true },
+    { name: 'Sentiment analysis', basic: false, growth: true, enterprise: true },
+    { name: 'Custom report builder', basic: false, growth: false, enterprise: true },
   ]},
-  { category: 'Analytics', items: [
-    { name: 'Basic pipeline view', hero: true, plus: true, pro: true },
-    { name: 'Analytics dashboard', hero: false, plus: true, pro: true },
-    { name: 'Custom report builder', hero: false, plus: false, pro: true },
-    { name: 'DEI metrics', hero: false, plus: true, pro: true },
+  { category: 'Integrations', items: [
+    { name: 'API access', basic: false, growth: false, enterprise: true },
+    { name: 'Full API + integrations', basic: false, growth: false, enterprise: true },
+    { name: 'White-label option', basic: false, growth: false, enterprise: true },
   ]},
-  { category: 'Compliance', items: [
-    { name: 'GDPR-aligned policies', hero: true, plus: true, pro: true },
-    { name: 'Audit logs', hero: false, plus: true, pro: true },
-    { name: 'Role-based permissions', hero: 'Basic', plus: true, pro: 'Advanced' },
-    { name: 'SSO / SAML', hero: false, plus: false, pro: true },
+  { category: 'Support', items: [
+    { name: 'Email support', basic: 'Standard', growth: 'Priority', enterprise: 'Dedicated' },
+    { name: 'Dedicated account manager', basic: false, growth: false, enterprise: true },
+    { name: 'SLA + custom onboarding', basic: false, growth: false, enterprise: true },
+    { name: 'SSO / SAML', basic: false, growth: false, enterprise: true },
   ]},
 ];
 
 const FAQ_ITEMS = [
-  { q: 'Is there a free trial?',            a: 'Yes - 14 days free on Hero and Plus, no credit card required. Cancel anytime.' },
-  { q: 'Can I switch plans later?',          a: 'Absolutely. Upgrade or downgrade at any time from billing settings. Prorated charges apply.' },
-  { q: 'How does the $9/job add-on work?',   a: 'On Hero, 3 base job slots are included. Extra active slots cost $9 per slot per month.' },
-  { q: 'What payment methods are accepted?', a: 'All major credit/debit cards. Enterprise invoicing is available on Pro.' },
-  { q: 'Is candidate data secure?',          a: 'All data is encrypted at rest and in transit, GDPR-aligned, with full audit logs on Plus and Pro.' },
-  { q: 'What counts as an AI interview?',    a: 'Each candidate sent a structured async video interview session counts as one. Plus includes 500/mo; Pro is unlimited.' },
+  { q: 'Is there a free trial?',              a: 'Yes - 14 days free on Basic and Growth, no credit card required. Cancel anytime.' },
+  { q: 'Can I switch plans later?',            a: 'Absolutely. Upgrade or downgrade at any time from billing settings. Prorated charges apply.' },
+  { q: 'What counts as an AI voice interview?', a: 'Each candidate sent a structured async voice interview session counts as one. Basic includes 50/mo; Growth includes 200/mo; Enterprise is unlimited.' },
+  { q: 'What payment methods are accepted?',   a: 'All major credit/debit cards. Enterprise invoicing is available on the Enterprise plan.' },
+  { q: 'Is candidate data secure?',            a: 'All data is encrypted at rest and in transit, GDPR-aligned, with full audit logs on Growth and Enterprise.' },
+  { q: 'What does the Enterprise plan include?', a: 'Everything in Growth plus unlimited resumes & interviews, full API access, white-label options, dedicated account manager, and a custom SLA with onboarding.' },
 ];
 
 type CellValue = boolean | string;
@@ -176,7 +164,10 @@ function PlanCard({ plan, annual, delay }: { plan: Plan; annual: boolean; delay:
               <span className="text-slate-500 text-[13px]">/ month</span>
             </div>
           ) : (
-            <div className="font-black text-[1.7rem] text-white">Custom pricing</div>
+            <div>
+              <div className="font-black text-[1.7rem] text-white">Custom pricing</div>
+              <div className="text-slate-500 text-[12px] mt-0.5">Tailored to your scale</div>
+            </div>
           )}
           {annual && price && <div className="text-emerald-400 text-[11.5px] mt-0.5">Saving 16% vs monthly</div>}
         </div>
@@ -321,13 +312,13 @@ export default function PricingPage() {
                   style={{ background: 'rgba(255,255,255,0.02)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
                   {category}
                 </div>
-                {items.map(({ name, hero, plus, pro }, i) => (
+                {items.map(({ name, basic, growth, enterprise }, i) => (
                   <div key={i} className="grid grid-cols-4 px-6 py-3 items-center"
                     style={{ borderTop: '1px solid rgba(255,255,255,0.03)', background: i % 2 === 0 ? 'rgba(255,255,255,0.01)' : undefined }}>
                     <div className="text-slate-300 text-[13px]">{name}</div>
-                    <div className="text-center"><CellVal v={hero} /></div>
-                    <div className="text-center"><CellVal v={plus} /></div>
-                    <div className="text-center"><CellVal v={pro} /></div>
+                    <div className="text-center"><CellVal v={basic} /></div>
+                    <div className="text-center"><CellVal v={growth} /></div>
+                    <div className="text-center"><CellVal v={enterprise} /></div>
                   </div>
                 ))}
               </React.Fragment>
